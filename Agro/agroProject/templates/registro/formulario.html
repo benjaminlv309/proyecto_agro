@@ -1,0 +1,44 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AgroAdmin | Registro de actividades</title>
+    <link rel="stylesheet" href="{% static 'css/estilos.css' %}">
+</head>
+<body>
+    <header>
+        <h1>🌱 AgroAdmin</h1>
+        <p>Registro de actividades agrícolas</p>
+    </header>
+    <main>
+        <div class="formulario">
+            <h2>Registrar actividad</h2>
+            <p class="descripcion">Ingresa los datos del trabajo realizado en la parcela.</p>
+            {% if messages %}
+                {% for message in messages %}
+                    <div class="mensaje {{ message.tags }}">{{ message }}</div>
+                {% endfor %}
+            {% endif %}
+            <form method="POST">
+                {% csrf_token %}
+                <div class="campo">
+                    <label for="responsable">¿Quién es el responsable?</label>
+                    <input type="text" id="responsable" name="responsable" maxlength="100" placeholder="Nombre del responsable" required></div>
+                <div class="campo">
+                    <label for="actividad">¿Qué se hizo?</label>
+                    <textarea id="actividad" name="actividad" placeholder="Describe el trabajo realizado" rows="5" required></textarea>
+                </div>
+                <div class="campo">
+                    <label for="parcela">¿Dónde se hizo?</label>
+                    <input type="text"id="parcela" name="parcela" maxlength="50" placeholder="Ej: Parcela 01" required></div>
+                <button type="submit">Guardar registro</button>
+            </form>
+        </div>
+    </main>
+    <footer>
+        AgroAdmin · Proyecto Administración Agrícola · INACAP TI 26.2
+    </footer>
+</body>
+</html>

@@ -1,0 +1,37 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eliminar registro | AgroAdmin</title>
+    <link rel="stylesheet" href="{% static 'css/admin.css' %}">
+</head>
+<body>
+    <header class="encabezado">
+        <div class="contenido-header">
+            <h1>🌱 AgroAdmin</h1>
+            <span>Panel de administración</span>
+        </div>
+    </header>
+    <main class="contenedor">
+        <section class="panel formulario-admin">
+            <h2>Eliminar registro</h2>
+            <p>¿Estás seguro de que deseas eliminar este registro?</p>
+            <div class="detalle-registro">
+                <p><strong>Responsable:</strong> {{ registro.responsable }}</p>
+                <p><strong>Actividad:</strong> {{ registro.actividad }}</p>
+                <p><strong>Parcela:</strong> {{ registro.parcela }}</p>
+            </div>
+            <form method="POST">
+                {% csrf_token %}
+                <div class="acciones-formulario">
+                    <button type="submit" class="btn-eliminar">Sí, eliminar</button>
+                    <a href="{% url 'dashboard' %}" class="btn-cancelar">Cancelar</a>
+                </div>
+            </form>
+        </section>
+    </main>
+    <footer>AgroAdmin · Proyecto Administración Agrícola · INACAP TI 26.2</footer>
+</body>
+</html>

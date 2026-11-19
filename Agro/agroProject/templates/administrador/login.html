@@ -1,0 +1,60 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Iniciar sesión | AgroAdmin</title>
+    <link rel="stylesheet" href="{% static 'css/login.css' %}">
+</head>
+<body>
+    <main class="contenedor-login">
+        <div class="tarjeta-login">
+            <div class="encabezado-login">
+                <div class="logo">🌱</div>
+                <h1>AgroAdmin</h1>
+                <p>Administración Agrícola</p>
+            </div>
+            <div class="contenido-login">
+                <h2>Iniciar sesión</h2>
+                <p class="descripcion">Acceso exclusivo para administradores</p>
+                {% if messages %}
+                    {% for message in messages %}
+                        <div class="mensaje-error" role="alert">{{ message }}</div>
+                    {% endfor %}
+                {% endif %}
+                <form method="POST">
+                    {% csrf_token %}
+                    <div class="campo-login">
+                        <label for="usuario">Usuario</label>
+                        <input type="text" id="usuario" name="usuario" placeholder="Ingresa tu usuario" autocomplete="username" maxlength="150" required>
+                    </div>
+                    <div class="campo-login">
+                        <label for="contrasena">Contraseña</label>
+                        <div class="contenedor-contrasena">
+                            <input type="password" id="contrasena" name="contrasena" placeholder="Ingresa tu contraseña" autocomplete="current-password" required>
+                            <button type="button" id="mostrarContrasena" class="btn-mostrar" aria-label="Mostrar contraseña" aria-pressed="false">Mostrar</button>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn-ingresar">Ingresar al panel</button>
+                </form>
+                <div class="volver">
+                    <a href="{% url 'inicio' %}">← Volver al inicio</a>
+                </div>
+            </div>
+        </div>
+    </main>
+    <footer>AgroAdmin · Proyecto Administración Agrícola · INACAP TI 26.2</footer>
+    <script>
+        const botonMostrar = document.getElementById('mostrarContrasena');
+        const campoContrasena = document.getElementById('contrasena');
+        botonMostrar.addEventListener('click', function () {
+            const visible = campoContrasena.type === 'text';
+            campoContrasena.type = visible ? 'password' : 'text';
+            botonMostrar.textContent = visible ? 'Mostrar' : 'Ocultar';
+            botonMostrar.setAttribute('aria-label', visible ? 'Mostrar contraseña' : 'Ocultar contraseña');
+            botonMostrar.setAttribute('aria-pressed',String(!visible));
+        });
+    </script>
+</body>
+</html>

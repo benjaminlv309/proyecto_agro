@@ -1,0 +1,37 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bienvenido | AgroAdmin</title>
+    <link rel="stylesheet" href="{% static 'css/inicio.css' %}">
+</head>
+<body>
+    <header class="encabezado">
+        <h1>🌱 AgroAdmin</h1>
+        <p>Sistema de Administración Agrícola</p>
+    </header>
+    <main class="contenedor">
+        <section class="bienvenida">
+            <h2>Bienvenido a AgroAdmin</h2>
+            <p>Plataforma para registrar y administrar las actividades realizadas en las parcelas.</p>
+            <div class="opciones">
+                <div class="tarjeta">
+                    <div class="icono">📝</div>
+                    <h3>Registro de actividades</h3>
+                    <p>Ingresa los trabajos realizados en las parcelas agrícolas.</p>
+                    <a href="{% url 'formulario_registro' %}" class="btn btn-verde" >Ir al formulario</a>
+                </div>
+                <div class="tarjeta">
+                    <div class="icono">🔐</div>
+                    <h3>Administración</h3>
+                    <p>Accede al panel administrativo para gestionar los registros.</p>
+                    <a href="{% url 'login_administrador' %}" class="btn btn-oscuro">Iniciar sesión</a>
+                </div>
+            </div>
+        </section>
+    </main>
+    <footer>AgroAdmin · Proyecto Administración Agrícola · INACAP TI 26.2</footer>
+</body>
+</html>

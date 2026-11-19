@@ -1,0 +1,191 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    font-family: Arial, sans-serif;
+    background: #f2f7f3;
+    color: #25332b;
+}
+
+.contenedor-login {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 35px 20px;
+}
+
+.tarjeta-login {
+    width: 100%;
+    max-width: 420px;
+    background: white;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.09);
+}
+
+.encabezado-login {
+    background: #214d39;
+    color: white;
+    text-align: center;
+    padding: 30px 20px;
+}
+
+.logo {
+    font-size: 40px;
+    margin-bottom: 8px;
+}
+
+.encabezado-login h1 {
+    margin: 0;
+    font-size: 28px;
+}
+
+.encabezado-login p {
+    margin: 8px 0 0;
+    color: #d7e7dc;
+    font-size: 14px;
+}
+
+.contenido-login {
+    padding: 30px;
+}
+
+.contenido-login h2 {
+    text-align: center;
+    font-size: 22px;
+    margin: 0 0 8px;
+}
+
+.descripcion {
+    text-align: center;
+    color: #718078;
+    font-size: 13px;
+    margin-bottom: 28px;
+}
+
+.campo-login {
+    margin-bottom: 20px;
+}
+
+.campo-login label {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.campo-login input {
+    width: 100%;
+    padding: 13px 14px;
+    border: 1px solid #dce5df;
+    border-radius: 8px;
+    font-size: 14px;
+    outline: none;
+    transition: border-color 0.2s;
+}
+
+.campo-login input:focus {
+    border-color: #2f6b4f;
+    box-shadow: 0 0 0 3px rgba(47, 107, 79, 0.12);
+}
+
+.contenedor-contrasena {
+    position: relative;
+}
+
+.contenedor-contrasena input {
+    padding-right: 85px;
+}
+
+.btn-mostrar {
+    position: absolute;
+    right: 8px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: transparent;
+    border: none;
+    color: #2f6b4f;
+    font-size: 12px;
+    font-weight: bold;
+    cursor: pointer;
+    padding: 8px;
+}
+
+.btn-ingresar {
+    width: 100%;
+    padding: 14px;
+    background: #2f6b4f;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 15px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.btn-ingresar:hover {
+    background: #214d39;
+}
+
+.mensaje-error {
+    background: #fde8e8;
+    color: #9c3030;
+    border: 1px solid #f5caca;
+    padding: 12px;
+    border-radius: 8px;
+    font-size: 13px;
+    margin-bottom: 20px;
+}
+
+.volver {
+    text-align: center;
+    margin-top: 24px;
+}
+
+.volver a {
+    color: #2f6b4f;
+    text-decoration: none;
+    font-size: 13px;
+}
+
+.volver a:hover {
+    text-decoration: underline;
+}
+
+footer {
+    background: #214d39;
+    color: #d7e7dc;
+    text-align: center;
+    padding: 18px 12px;
+    font-size: 12px;
+}
+
+@media (max-width: 480px) {
+
+    .contenedor-login {
+        padding: 20px 12px;
+    }
+
+    .contenido-login {
+        padding: 25px 20px;
+    }
+
+    .encabezado-login {
+        padding: 25px 15px;
+    }
+
+    .encabezado-login h1 {
+        font-size: 25px;
+    }
+
+    footer {
+        line-height: 1.6;
+    }
+}

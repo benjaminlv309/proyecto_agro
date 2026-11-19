@@ -1,0 +1,175 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f5f7f5;
+    color: #25332b;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+header {
+    background-color: #214d39;
+    color: white;
+    padding: 25px 20px;
+    text-align: center;
+}
+
+header h1 {
+    margin: 0;
+    font-size: 28px;
+}
+
+header p {
+    margin: 8px 0 0;
+    font-size: 14px;
+    color: #d7e7dc;
+}
+
+main {
+    flex: 1;
+    width: 100%;
+    padding: 40px 20px;
+}
+
+.formulario {
+    background-color: white;
+    max-width: 550px;
+    margin: 0 auto;
+    padding: 30px;
+    border: 1px solid #dce5df;
+    border-radius: 12px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.06);
+}
+
+.formulario h2 {
+    margin: 0;
+    font-size: 23px;
+}
+
+.descripcion {
+    color: #718078;
+    font-size: 14px;
+    line-height: 1.5;
+    margin-bottom: 25px;
+}
+
+.campo {
+    margin-bottom: 20px;
+}
+
+.campo label {
+    display: block;
+    font-size: 14px;
+    font-weight: bold;
+    margin-bottom: 8px;
+}
+
+.campo input,
+.campo textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #dce5df;
+    border-radius: 8px;
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+}
+
+.campo textarea {
+    resize: vertical;
+}
+
+.campo input:focus,
+.campo textarea:focus {
+    outline: none;
+    border-color: #2f6b4f;
+}
+
+button {
+    width: 100%;
+    padding: 13px;
+    background-color: #2f6b4f;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 15px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #214d39;
+}
+
+.mensaje {
+    padding: 12px;
+    margin-bottom: 20px;
+    border-radius: 8px;
+    font-size: 14px;
+}
+
+.success {
+    background-color: #e7f5ec;
+    color: #276749;
+}
+
+.error {
+    background-color: #fde8e8;
+    color: #a33a3a;
+}
+
+footer {
+    background-color: #214d39;
+    color: #d7e7dc;
+    text-align: center;
+    padding: 18px;
+    font-size: 12px;
+}
+
+@media (max-width: 600px) {
+
+    header {
+        padding: 20px 15px;
+    }
+
+    header h1 {
+        font-size: 24px;
+    }
+
+    main {
+        padding: 20px 12px;
+    }
+
+    .formulario {
+        padding: 22px 18px;
+    }
+
+    .formulario h2 {
+        font-size: 21px;
+    }
+
+    footer {
+        padding: 15px 12px;
+        line-height: 1.6;
+    }
+}
+
+.volver-inicio {
+    text-align: center;
+    margin-top: 22px;
+}
+
+.volver-inicio a {
+    color: #2f6b4f;
+    font-size: 14px;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.volver-inicio a:hover {
+    text-decoration: underline;
+}

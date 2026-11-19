@@ -1,0 +1,86 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel de administración | AgroAdmin</title>
+    <link rel="stylesheet" href="{% static 'css/admin.css' %}">
+</head>
+<body>
+    <header class="encabezado">
+        <div class="contenido-header">
+            <h1>🌱 AgroAdmin</h1>
+            <div class="acciones-header">
+                <span>Panel de administración</span>
+                <form method="POST" action="{% url 'cerrar_sesion' %}">
+                    {% csrf_token %}
+                    <button type="submit" class="btn-salir">Cerrar sesión</button>
+                </form>
+            </div>
+        </div>
+    </header>
+    <main class="contenedor">
+        <div class="bienvenida">
+            <h2>Panel de administración</h2>
+            <p>Bienvenido, {{ request.user.username }}</p>
+        </div>
+        {% if messages %}
+            {% for message in messages %}
+                <div class="mensaje {{ message.tags }}">{{ message }}</div>
+            {% endfor %}
+        {% endif %}
+        <section class="estadisticas">
+            <h3>Total de actividades registradas</h3>
+            <p>{{ total_registros }}</p>
+        </section>
+        <section class="panel">
+            <div class="titulo-panel">
+                <h3>Registros de actividades</h3>
+                <a href="{% url 'agregar_registro' %}" class="btn-agregar">+ Agregar registro</a>
+            </div>
+            <form method="GET" class="buscador">
+                <input type="text" name="buscar" placeholder="Buscar por responsable, actividad o parcela" value="{{ busqueda }}">
+                <button type="submit">Buscar</button>
+                <a href="{% url 'dashboard' %}" class="limpiar">Limpiar</a>
+            </form>
+            <div class="tabla-responsive">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Responsable</th>
+                            <th>Actividad realizada</th>
+                            <th>Parcela</th>
+                            <th>Fecha</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for registro in registros %}
+                            <tr>
+                                <td>{{ registro.id }}</td>
+                                <td>{{ registro.responsable }}</td>
+                                <td>{{ registro.actividad }}</td>
+                                <td>{{ registro.parcela }}</td>
+                                <td>{{ registro.fecha_registro|date:"d/m/Y H:i" }}</td>
+                                <td>
+                                    <div class="acciones-tabla">
+                                        <a href="{% url 'editar_registro' registro.id %}" class="btn-editar">Editar</a>
+                                        <a href="{% url 'eliminar_registro' registro.id %}" class="btn-borrar">Eliminar</a>
+                                    </div>
+                                </td>
+                            </tr>
+                        {% empty %}
+                            <tr>
+                                <td colspan="6" class="sin-registros">No se encontraron registros.</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </section>
+    </main>
+    <footer>AgroAdmin · Proyecto Administración Agrícola · INACAP TI 26.2</footer>
+</body>
+</html>

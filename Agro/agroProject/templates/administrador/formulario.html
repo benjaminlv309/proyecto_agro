@@ -1,0 +1,45 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ titulo }} | AgroAdmin</title>
+    <link rel="stylesheet" href="{% static 'css/admin.css' %}">
+</head>
+<body>
+    <header class="encabezado">
+        <div class="contenido-header">
+            <h1>🌱 AgroAdmin</h1>
+            <span>Panel de administración</span>
+        </div>
+    </header>
+    <main class="contenedor">
+        <section class="panel formulario-admin">
+            <h2>{{ titulo }}</h2>
+            <form method="POST">
+                {% csrf_token %}
+                {% for campo in formulario %}
+                    <div class="campo-admin">
+                        <label for="{{ campo.id_for_label }}">
+                            {{ campo.label }}
+                        </label>
+                        {{ campo }}
+                        {% for error in campo.errors %}
+                            <p class="error-campo">{{ error }}</p>
+                        {% endfor %}
+                    </div>
+                {% endfor %}
+                <div class="acciones-formulario">
+                    <button type="submit" class="btn-guardar">Guardar registro</button>
+                    <a href="{% url 'dashboard' %}" class="btn-cancelar">Cancelar</a>
+                </div>
+            </form>
+            <div class="volver-inicio">
+                <a href="{% url 'inicio' %}">← Volver al inicio</a>
+            </div>
+        </section>
+    </main>
+    <footer>AgroAdmin · Proyecto Administración Agrícola · INACAP TI 26.2</footer>
+</body>
+</html>
