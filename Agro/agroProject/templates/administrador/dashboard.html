@@ -39,10 +39,31 @@
                 <h3>Registros de actividades</h3>
                 <a href="{% url 'agregar_registro' %}" class="btn-agregar">+ Agregar registro</a>
             </div>
-            <form method="GET" class="buscador">
-                <input type="text" name="buscar" placeholder="Buscar por responsable, actividad o parcela" value="{{ busqueda }}">
-                <button type="submit">Buscar</button>
-                <a href="{% url 'dashboard' %}" class="limpiar">Limpiar</a>
+            <form method="GET" action="{% url 'dashboard' %}" class="busqueda-avanzada">
+                <div class="campo-busqueda">
+                    <label for="id">ID del registro</label>
+                    <input type="number" name="id" id="id" placeholder="Ej: 15" value="{{ busqueda_id }}" min="1">
+                </div>
+                <div class="campo-busqueda">
+                    <label for="responsable">Responsable</label>
+                    <input type="text" name="responsable" id="responsable" placeholder="Nombre del responsable" value="{{ busqueda_responsable }}">
+                </div>
+                <div class="campo-busqueda">
+                    <label for="fecha">Fecha de registro</label>
+                    <input type="date" name="fecha" id="fecha" value="{{ busqueda_fecha }}">
+                </div>
+                <div class="campo-busqueda">
+                    <label for="parcela">Parcela</label>
+                    <input type="text" name="parcela" id="parcela" placeholder="Ej: Parcela 01" value="{{ busqueda_parcela }}">
+                </div>
+                <div class="campo-busqueda">
+                    <label for="actividad">Actividad realizada</label>
+                    <input type="text" name="actividad" id="actividad" placeholder="Buscar actividad" value="{{ busqueda_actividad }}">
+                </div>
+                <div class="acciones-busqueda">
+                    <button type="submit" class="btn-buscar">Buscar registros</button>
+                    <a href="{% url 'dashboard' %}" class="btn-limpiar">Limpiar filtros</a>
+                </div>
             </form>
             <div class="tabla-responsive">
                 <table>

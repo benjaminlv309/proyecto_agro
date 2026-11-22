@@ -6,6 +6,8 @@ from django.db.models import Q
 from django.views.decorators.http import require_POST
 from .models import RegistroActividad
 from .forms import RegistroActividadForm
+from datetime import datetime, timedelta
+from django.utils import timezone
 
 def es_administrador(user):
     return user.is_authenticated and user.is_staff
@@ -42,23 +44,45 @@ def login_administrador(request):
         messages.error(request,'Usuario o contraseña incorrectos, o sin permisos.')
     return render(request,'administrador/login.html')
 
-@user_passes_test(es_administrador,login_url='login_administrador')
+
+@user_passes_test(es_administrador, login_url='login_administrador')
 def dashboard(request):
-    busqueda = request.GET.get('buscar', '').strip()
+    busqueda_id = request.GET.get('id', '').strip()
+    busqueda_responsable = request.GET.get('responsable', '').strip()
+    busqueda_fecha = request.GET.get('fecha', '').strip()
+    busqueda_parcela = request.GET.get('parcela', '').strip()
+    busqueda_actividad = request.GET.get('actividad', '').strip()
     registros = RegistroActividad.objects.all()
-    if busqueda:
-        registros = registros.filter(
-            Q(responsable__icontains=busqueda) |
-            Q(actividad__icontains=busqueda) |
-            Q(parcela__icontains=busqueda)
-        )
+    if busqueda_id:
+        if busqueda_id.isdigit():
+            registros = registros.filter(id=int(busqueda_id))
+        else:
+            registros = registros.none()
+    if busqueda_responsable:
+        registros = registros.filter(responsable__icontains=busqueda_responsable)
+    if busqueda_fecha:
+        try:
+            fecha = datetime.strptime(busqueda_fecha, '%Y-%m-%d').date()
+            inicio_dia = timezone.make_aware(datetime.combine(fecha, datetime.min.time()),timezone.get_current_timezone())
+            fin_dia = inicio_dia + timedelta(days=1)
+            registros = registros.filter(fecha_registro__gte=inicio_dia,fecha_registro__lt=fin_dia)
+        except ValueError:
+            registros = registros.none()
+    if busqueda_parcela:
+        registros = registros.filter(parcela__icontains=busqueda_parcela)
+    if busqueda_actividad:
+        registros = registros.filter(actividad__icontains=busqueda_actividad)
     total_registros = RegistroActividad.objects.count()
     context = {
         'registros': registros,
         'total_registros': total_registros,
-        'busqueda': busqueda
+        'busqueda_id': busqueda_id,
+        'busqueda_responsable': busqueda_responsable,
+        'busqueda_fecha': busqueda_fecha,
+        'busqueda_parcela': busqueda_parcela,
+        'busqueda_actividad': busqueda_actividad,
     }
-    return render(request,'administrador/dashboard.html',context)
+    return render(request, 'administrador/dashboard.html', context)
 
 @user_passes_test(es_administrador,login_url='login_administrador')
 def agregar_registro(request):
